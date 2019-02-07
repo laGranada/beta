@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    <h:body>
+        <h1>Kontakte</h1>
+        
+        <p:dataTable var="contacts" value="#{contactController.contactList}">
+            <p:column headerText="Vorname">
+                <h:outputText value="#{contacts.firstName}" />
+            </p:column>
+ 
+            <p:column headerText="Nachname">
+                <h:outputText value="#{contacts.lastName}" />
+            </p:column>
+
+            <p:column headerText="Anschrift">
+                <h:outputText value="#{contactController.street(contacts)}" escape ="false" />
+            </p:column>
+
+            <p:column headerText="Postleitzahl">
+                <h:outputText value="#{contactController.zipCode(contacts)}" escape ="false" />
+            </p:column>
+            
+            <p:column headerText="Kommunikation">
+                <h:outputText value="#{contactController.communication(contacts)}" escape ="false" />
+            </p:column>
+        </p:dataTable>
+    </h:body>
+    
+</html>
+
