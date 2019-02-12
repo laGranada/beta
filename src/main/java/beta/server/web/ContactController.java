@@ -16,9 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 
-
-
-
 /**
  *
  * @author margarita.dueck
@@ -29,6 +26,7 @@ public class ContactController implements Serializable{
   
     @Inject
     ContactEao contactEao;
+
     private List<Contact> contactList;
 
     /**
@@ -36,6 +34,7 @@ public class ContactController implements Serializable{
      * @return contactList
      */
     public List<Contact> getContactList() {
+        
         return contactList;
     }
     
@@ -52,6 +51,7 @@ public class ContactController implements Serializable{
      * @return
      */
     public String zipCode(Contact contact){
+        
         return contact.getAddresses()
                 .stream()
                 .map(add -> add.getZipCode())

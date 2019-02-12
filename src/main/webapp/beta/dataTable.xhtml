@@ -14,7 +14,7 @@
         
         <p:dataTable var="contacts" value="#{contactController.contactList}">
             <p:column headerText="Vorname">
-                <h:outputText value="#{contacts.firstName}" />
+                <h:outputText value="#{contacts.toFullName()}" />
             </p:column>
  
             <p:column headerText="Nachname">

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    <h:head></h:head>  
+    
+        
+    
+    <body>
+       <h:form id="form">
+        <p:treeTable style="width:600px" value="#{ttBasicView.root}" var="contact">
+            <f:facet name="header">
+                Kontakte
+            </f:facet>
+            <p:column  headerText="Name">
+                <h:outputText value="#{contact}" />
+            </p:column>
+        </p:treeTable> 
+        
+        <p:dialog id="dialog" header="Contact Detail" showEffect="fade" widgetVar="contactDialog" modal="true" resizable="false">
+            <p:outputPanel id="contactPanel">
+                <p:panelGrid>
+                    <h:outputLabel for="name" value="Name: " />
+                    <h:outputText id="name" value="#{ttBasicView.selectedContact}" style="font-weight:bold" />
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+    </h:form>
+    </body>
+</html>
