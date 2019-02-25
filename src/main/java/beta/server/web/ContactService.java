@@ -35,7 +35,7 @@ public class ContactService implements Serializable {
     private List<Contact> contactList;
     
     /**
-     * creates the TreeNodes with the contacts
+     * creates TreeNodes with contacts
      * @return root
      */
     public TreeNode createContacts(){

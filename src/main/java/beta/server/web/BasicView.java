@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 
 /**
- * zeigt den TreeTable an
+ * handles output
  * @author margarita.dueck
  */
 @ViewScoped
