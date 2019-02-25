@@ -11,17 +11,16 @@ import beta.server.entity.Communication;
 import beta.server.entity.Contact;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.primefaces.model.CheckboxTreeNode;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import lombok.Getter;
 /**
- *
+ * access the the database
+ * creates the treeTable
  * @author margarita.dueck
  */
 
@@ -33,9 +32,12 @@ public class ContactService implements Serializable {
     private ContactEao cEao;
     
     @Getter
-    List<Contact> contactList;
+    private List<Contact> contactList;
     
-    
+    /**
+     * creates the treeNodes
+     * @return root
+     */
     public TreeNode createContacts(){
         this.contactList = cEao.findAll();
         
@@ -44,8 +46,8 @@ public class ContactService implements Serializable {
         for(int i = 0; i < contactList.size(); i++ ){
             TreeNode name = new DefaultTreeNode(contactList.get(i).toFullName(), root);
             
-            TreeNode address = new DefaultTreeNode("Adresse", name);
-            TreeNode communication = new DefaultTreeNode("Kommunikation", name);
+            TreeNode address = new DefaultTreeNode("Adresses", name);
+            TreeNode communication = new DefaultTreeNode("Communications", name);
             
             //Adresses
             for (Address add : contactList.get(i).getAddresses()) {

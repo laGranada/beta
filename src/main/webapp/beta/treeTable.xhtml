@@ -10,37 +10,46 @@ and open the template in the editor.
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-    <h:head></h:head>  
     
-        
+     <!-- will center the website on screens that are wider than 800px -->
+    <style>
+        body{
+            background: #E6E6FA;
+        }
+        .content {
+          max-width: 800px;
+          margin: auto;
+        }
+    </style>
+    
+    <h:head>
+        <title>Contacts</title>
+    </h:head>     
     
     <body>
-        
+    <div class="content">    
         <h1 algin="center">
-            Kontaktinformationen
+            Contactinformations
         </h1>
-        <h2 align="right" style="color: purple">
-            Maggie
-        </h2>
         
-       <h:form id="form">
-        <p:treeTable style="width:600px" value="#{ttBasicView.root}" var="contact">
+        <h:link target="_blank" rel="noopener noreferrer" outcome="contactSection" value="Contact us" /> <br />
+        
+        <h3 align="left" style="color: purple">
+            by Maggie
+        </h3>
+
+        <h:form id="form" >
+        <p:treeTable  style="width:800px"  value="#{ttBasicView.root}" var="contact">
             <f:facet name="header">
-                Kontakte
+                Contacts
             </f:facet>
             <p:column  headerText="Name">
                 <h:outputText value="#{contact}" />
             </p:column>
         </p:treeTable> 
         
-        <p:dialog id="dialog" header="Contact Detail" showEffect="fade" widgetVar="contactDialog" modal="true" resizable="false">
-            <p:outputPanel id="contactPanel">
-                <p:panelGrid>
-                    <h:outputLabel for="name" value="Name: " />
-                    <h:outputText id="name" value="#{ttBasicView.selectedContact}" style="font-weight:bold" />
-                </p:panelGrid>
-            </p:outputPanel>
-        </p:dialog>
+        
     </h:form>
+    </div>
     </body>
 </html>

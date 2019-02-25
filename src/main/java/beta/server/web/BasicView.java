@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 
 /**
- *
+ * zeigt den TreeTable an
  * @author margarita.dueck
  */
 @ViewScoped
@@ -30,26 +30,36 @@ public class BasicView implements Serializable {
           
     private Contact selectedContact;
     
-//    @ManagedProperty("#{contactService}")
     @Inject
     private ContactService service;
     
+    /**
+     *init-Method
+     */
     @PostConstruct
     public void init() {
         root = service.createContacts();
     }
     
+    /**
+     *
+     * @return root
+     */
     public TreeNode getRoot() {
         return root;
     }
  
+    /**
+     *
+     * @param service
+     */
     public void setService(ContactService service) {
         this.service = service;
     }
  
     /**
      *
-     * @return
+     * @return selectedContact
      */
     public Contact getSelectedContact() {
         return selectedContact;
