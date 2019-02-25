@@ -7,8 +7,9 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Contact Section</title>
+        <title>Contact Us</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
     <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -29,7 +30,7 @@ and open the template in the editor.
     }
 
     input[type=submit] {
-      background-color: #4CAF50;
+      background-color: #be8fd8;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -37,7 +38,7 @@ and open the template in the editor.
     }
 
     input[type=submit]:hover {
-      background-color: #45a049;
+      background-color: #d3d3f0;
     }
 
     /* Style the container/contact section */
@@ -73,37 +74,44 @@ and open the template in the editor.
     </head>
     <body>
 
-<h2>Contact Section</h2>
+        <h2>Contact Section</h2>
 
-<div class="container">
-  <div style="text-align:center">
-    <h2>Contact Us</h2>
-    <p>Swing by for a cup of coffee, or leave us a message:</p>
-  </div>
-  <div class="row">
-    <div class="column">
-      <img src="cats.jpg" style="width:100%"/>
-    </div>
-    <div class="column">
-      <form action="/action_page.php">
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="firstname" placeholder="Your name.."/>
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname" placeholder="Your last name.."/>
-        <label for="country">Country</label>
-        <select id="country" name="country">
-          <option value="germany">Germany</option>  
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option> 
-        </select>
-        <label for="subject">Subject</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-        <input type="submit" value="Submit"/>
-      </form>
-    </div>
-  </div>
-</div>
+        <div class="container">
+            <div style="text-align:center">
+                <h2>Contact Us</h2>
+                <p>Swing by for a cup of tuna, or leave us a message:</p>
+            </div>
+            
+            <div class="row">
+            <div class="column">
+              <img src="cats.jpg" style="width:100%"/>
+            </div>
+               
+            <div class="column">
+               <!-- On submit, send the form-data to a file named "/action_page.php" (to process the input):--> 
+              <form action="/action_page.php">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name.."/>
+                
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name.."/>
+                
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                  <option value="germany">Germany</option>  
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option> 
+                </select>
+                
+                <label for="subject">Subject</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+                
+                <input type="submit" value="Submit"/>
+              </form>
+            </div>
+          </div>
+        </div>
 
-</body>
+    </body>
 </html>
