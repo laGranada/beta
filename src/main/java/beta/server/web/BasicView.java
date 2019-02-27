@@ -28,7 +28,7 @@ public class BasicView implements Serializable {
      private TreeNode root;
     
           
-    private Contact selectedContact;
+//    private Contact selectedContact;
     
     @Inject
     private ContactService service;
@@ -49,28 +49,28 @@ public class BasicView implements Serializable {
         return root;
     }
  
-    /**
-     *
-     * @param service
-     */
-    public void setService(ContactService service) {
-        this.service = service;
-    }
+//    /**
+//     *
+//     * @param service
+//     */
+//    public void setService(ContactService service) {
+//        this.service = service;
+//    }
  
     /**
-     *
-     * @return selectedContact
-     */
-    public Contact getSelectedContact() {
-        return selectedContact;
-    }
- 
-    /**
-     *
-     * @param selectedContact
-     */
-    public void setSelectedContact(Contact selectedContact) {
-        this.selectedContact = selectedContact;
-    }
+//     *
+//     * @return selectedContact
+//     */
+//    public Contact getSelectedContact() {
+//        return selectedContact;
+//    }
+// 
+//    /**
+//     *
+//     * @param selectedContact
+//     */
+//    public void setSelectedContact(Contact selectedContact) {
+//        this.selectedContact = selectedContact;
+//    }
      
 }
