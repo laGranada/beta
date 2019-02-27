@@ -9,8 +9,9 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	xmlns:p="http://primefaces.org/ui"
+        href="https://www.w3schools.com/w3css/4/w3.css">
+
      <!-- will center the website on screens that are wider than 800px -->
     <style>
         body{
@@ -32,10 +33,10 @@ and open the template in the editor.
                 box-sizing: border-box;
             }
             
-            
     </style>
     
     <h:head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
         <title>Contacts</title>
     </h:head>       
     
@@ -48,7 +49,7 @@ and open the template in the editor.
             <h:link target="_blank" rel="noopener noreferrer" outcome="contactSection" value="Contact us" /> <br />
             
             <h3 align="left" style="color: purple">
-                by Maggie
+                by Maggie<i class="fa fa-trash"></i>
             </h3>
             
             <h:form id="form" >
