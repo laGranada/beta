@@ -5,76 +5,74 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+     <!-- will center the website on screens that are wider than 800px -->
+    <style>
+        body{
+            background: #E6E6FA;
+        }
+        .content {
+          max-width: 800px;
+          margin: auto;
+        }
+        .ui-row-editor .ui-row-editor-pencil {
+                margin-left:8px;
+            }
 
-    <style type="text/css">
-    .ui-row-editor .ui-row-editor-pencil {
-        margin-left:8px;
-    }
- 
-    .ui-editable-column .ui-cell-editor-input {
-        overflow: hidden;
-    }
- 
-    .ui-editable-column .ui-cell-editor-input * {
-        box-sizing: border-box;
-    }
+            .ui-editable-column .ui-cell-editor-input {
+                overflow: hidden;
+            }
+
+            .ui-editable-column .ui-cell-editor-input * {
+                box-sizing: border-box;
+            }
     </style>
     
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <h:Body>
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true"/>
-
-            <p:treeTable value="#{editView.root}" editable="true" var="contact" style="margin-bottom:20px">
-                <f:facet name="header">
-                    Row Editing
-                </f:facet>
-
-                <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
-
-                <p:column headerText="Name"> 
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{contact.name}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{contact.name}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column style="width:32px">
-                    <p:rowEditor />
-                </p:column>
-            </p:treeTable>
-
-            <p:treeTable value="#{ttEditView.root2}" editable="true" editMode="cell" var="document">
-                <f:facet name="header">
-                    Cell Editing
-                </f:facet>
-
-                <p:ajax event="cellEdit" listener="#{ttEditView.onCellEdit}" update=":form:msgs" />
-
-                <p:column headerText="Name"> 
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{document.name}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{document.name}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Size">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{document.size}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{document.size}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Type">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{document.type}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{document.type}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-            </p:treeTable>
-         </h:form>
-        
+    <h:head>
+        <title>Contacts</title>
+    </h:head>       
     
+    <h:body>
+        <div class="content">    
+            <h1 algin="center">
+                Contactinformations
+            </h1>
+            
+            <h:link target="_blank" rel="noopener noreferrer" outcome="contactSection" value="Contact us" /> <br />
+            
+            <h3 align="left" style="color: purple">
+                by Maggie
+            </h3>
+            
+            <h:form id="form" >
+                
+                <p:growl id="msgs" showDetail="true"/>
+                
+                <p:treeTable  style="width:800px" value="#{ttBasicView.root}" var="contact" editable="true">
+                    <f:facet name="header">
+                        Contacts
+                    </f:facet>   
+                    
+                    <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
+                    
+                    <p:column  headerText="Name">
+                        <p:cellEditor>
+                             <f:facet name="output"><h:outputText value="#{contact}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{contact}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                </p:treeTable> 
+            </h:form>
+        </div>
+    </h:body>
 </html>

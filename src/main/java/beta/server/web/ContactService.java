@@ -11,6 +11,7 @@ import beta.server.entity.Communication;
 import beta.server.entity.Contact;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

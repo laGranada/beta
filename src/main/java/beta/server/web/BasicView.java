@@ -6,14 +6,16 @@
 package beta.server.web;
 
 
-import beta.server.entity.Contact;
 import java.io.Serializable;
 
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.model.TreeNode;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.primefaces.event.RowEditEvent;
 
 
 
@@ -48,6 +50,7 @@ public class BasicView implements Serializable {
     public TreeNode getRoot() {
         return root;
     }
+    
  
 //    /**
 //     *
@@ -72,5 +75,6 @@ public class BasicView implements Serializable {
 //    public void setSelectedContact(Contact selectedContact) {
 //        this.selectedContact = selectedContact;
 //    }
+
      
 }

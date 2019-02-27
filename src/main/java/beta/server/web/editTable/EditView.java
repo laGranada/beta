@@ -24,7 +24,7 @@ import org.primefaces.model.TreeNode;
 public class EditView implements Serializable {
     
     private TreeNode root;
-    
+
     @Inject
     private ContactServiceETT cService;
     
