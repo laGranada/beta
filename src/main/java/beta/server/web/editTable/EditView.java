@@ -22,28 +22,15 @@ import org.primefaces.model.TreeNode;
 @ViewScoped
 @Named("editView")
 public class EditView implements Serializable {
-    
-    private TreeNode root;
-
-    @Inject
-    private ContactServiceETT cService;
-    
-    @PostConstruct
-    public void init(){
-        root = cService.createContacts();
-    }
-    
-    public TreeNode getRoot(){
-        return root;
-    }
-    
-    public void setService(ContactServiceETT service){
-        this.cService = service;
-    }
-    
+     
     public void onRowEdit(RowEditEvent event){
-        FacesMessage msg = new FacesMessage("Document Edited", ((TreeNode) event.getObject()).toString());
+        FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        //getViolationMessage
+//        Object newValue = event.getObject();
+
+        
     }
     
     public void onRowCancel(RowEditEvent event) {

@@ -10,7 +10,7 @@ and open the template in the editor.
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
      <!-- will center the website on screens that are wider than 800px -->
     <style>
         body{
@@ -31,6 +31,8 @@ and open the template in the editor.
             .ui-editable-column .ui-cell-editor-input * {
                 box-sizing: border-box;
             }
+            
+            
     </style>
     
     <h:head>
@@ -53,7 +55,7 @@ and open the template in the editor.
                 
                 <p:growl id="msgs" showDetail="true"/>
                 
-                <p:treeTable  style="width:800px" value="#{ttBasicView.root}" var="contact" editable="true">
+                <p:treeTable  style="width:800px" value="#{contactService.root}" var="contact" editable="true">
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
@@ -68,8 +70,13 @@ and open the template in the editor.
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column style="width:32px">
+                    <p:column style="width:40px">
                         <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column style="width:50px">
+                        <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
+                        <p:commandButton type="button" title="Delete" icon="pi pi-trash"/><i class="pi pi-trash"></i>
                     </p:column>
                 </p:treeTable> 
             </h:form>

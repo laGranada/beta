@@ -13,10 +13,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
-import javax.faces.view.ViewScoped;
+
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.model.CheckboxTreeNode;
+
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -26,10 +26,13 @@ import org.primefaces.model.TreeNode;
  */
 
 @Stateless
+@Named("contactService")
 public class ContactServiceETT implements Serializable {
     
     @Inject
     private ContactEao cEao;
+    
+    private TreeNode root;
     
     private List<Contact> contactList;
 
@@ -40,7 +43,7 @@ public class ContactServiceETT implements Serializable {
     public TreeNode createContacts(){
         contactList = cEao.findAll();
         
-        TreeNode root = new DefaultTreeNode("Names", null);
+        this.root = new DefaultTreeNode("Names", null);
         
         for(int i = 0; i < contactList.size(); i++ ){
             TreeNode name = new DefaultTreeNode(contactList.get(i).toFullName(), root);
@@ -62,26 +65,14 @@ public class ContactServiceETT implements Serializable {
     
     }
     
-    public TreeNode creatCheckboxContacts(){
-        contactList = cEao.findAll();
-        
-        TreeNode root = new CheckboxTreeNode("Names", null);
-        
-        for(int i = 0; i < contactList.size(); i++ ){
-            TreeNode name = new CheckboxTreeNode(contactList.get(i).toFullName(), root);
-            
-            TreeNode address = new CheckboxTreeNode("Adresses", name);
-            TreeNode communication = new CheckboxTreeNode("Communications", name);
-            
-            //Adresses
-            for (Address add : contactList.get(i).getAddresses()) {
-                TreeNode addresses = new CheckboxTreeNode(add.toSingleLineString(), address);
-            }
-            //Communication
-            for (Communication comm : contactList.get(i).getCommunications()){
-                TreeNode communications = new CheckboxTreeNode(comm.toSingleLineString(), communication);
-            }
-        }
-        return null;
+    @PostConstruct
+    public void init(){
+        this.root = createContacts();
     }
+    
+    public TreeNode getRoot(){
+        return root;
+    }
+    
+    
 }
