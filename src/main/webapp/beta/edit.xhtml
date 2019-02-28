@@ -18,7 +18,7 @@ and open the template in the editor.
             background: #E6E6FA;
         }
         .content {
-          max-width: 800px;
+          max-width: 1500px;
           margin: auto;
         }
         .ui-row-editor .ui-row-editor-pencil {
@@ -36,7 +36,7 @@ and open the template in the editor.
     </style>
     
     <h:head>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>-->
         <title>Contacts</title>
     </h:head>       
     
@@ -56,30 +56,80 @@ and open the template in the editor.
                 
                 <p:growl id="msgs" showDetail="true"/>
                 
-                <p:treeTable  style="width:800px" value="#{contactService.root}" var="contact" editable="true">
+                <p:treeTable  style="width:1500px" value="#{contactService.root}" var="contact" editable="true" nodeVar="node">
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
                     
                     <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs" />
                     <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
-                    
-                    <p:column  headerText="Name">
-                        <p:cellEditor>
-                             <f:facet name="output"><h:outputText value="#{contact}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{contact}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
+                    <!--FirstName-->
+                    <p:column  headerText="First name">
+                        <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
+                            <p:cellEditor>                           
+                                 <f:facet name="output"><h:outputText value="#{contact.firstName}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.firstName}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode> 
+                        <p:treeNode type="beschreibung" rendered="#{node.type == 'beschreibung'}">
+                            <h:outputText value="#{contact}"></h:outputText>
+                        </p:treeNode>
                     </p:column>
-                    
+                    <!--LastName-->
+                    <p:column   headerText="Last name">
+                        <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
+                            <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{contact.lastName}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.lastName}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode>     
+                    </p:column>
+                    <!--Communication-->
+                    <p:column  headerText="Communication">
+                        <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
+                            <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{contact.toSingleLineString()}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.toSingleLineString()}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode>    
+                    </p:column>
+                    <!--Street-->
+                    <p:column  headerText="Street">
+                        <p:treeNode type="address" rendered="#{node.type == 'address'}">
+                            <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{contact.street}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.street}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode>
+                    </p:column>
+                    <!--Zip-->
+                    <p:column  headerText="Zip code">
+                        <p:treeNode type="address" rendered="#{node.type == 'address'}">
+                            <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{contact.zipCode}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.zipCode}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode>
+                    </p:column>
+                    <!--Country-->
+                    <p:column  headerText="Country">
+                        <p:treeNode type="address" rendered="#{node.type == 'address'}">
+                            <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{contact.country}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.country}" style="width:100%"/></f:facet>
+                            </p:cellEditor>
+                        </p:treeNode>
+                    </p:column>
+                    <!--Pencil-->
                     <p:column style="width:40px">
                         <p:rowEditor />
                     </p:column>
-                    
-                    <p:column style="width:50px">
+                    <!--DeleteButton-->
+                    <p:column style="width:90px">
                         <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
-                        <p:commandButton type="button" title="Delete" icon="pi pi-trash"/><i class="pi pi-trash"></i>
+                        <p:commandButton type="button" title="Delete" value="Delete"/>
                     </p:column>
-                </p:treeTable> 
+                </p:treeTable>
             </h:form>
         </div>
     </h:body>

@@ -6,14 +6,14 @@
 package beta.server.web.editTable;
 
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.TreeNode;
+import beta.server.entity.Contact;
+import org.primefaces.event.CellEditEvent;
 
 /**
  *
@@ -22,19 +22,17 @@ import org.primefaces.model.TreeNode;
 @ViewScoped
 @Named("editView")
 public class EditView implements Serializable {
+    
+    Contact contact = new Contact();
      
     public void onRowEdit(RowEditEvent event){
         FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        
-        //getViolationMessage
-//        Object newValue = event.getObject();
-
-        
     }
     
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+
 }

@@ -24,55 +24,57 @@ import org.primefaces.model.TreeNode;
  *
  * @author margarita.dueck
  */
-
 @Stateless
 @Named("contactService")
 public class ContactServiceETT implements Serializable {
-    
+
     @Inject
     private ContactEao cEao;
-    
+
+    @Inject
+    private Contact contact;
+
     private TreeNode root;
-    
+
     private List<Contact> contactList;
 
     public List<Contact> getContactList() {
         return contactList;
     }
-    
-    public TreeNode createContacts(){
-        contactList = cEao.findAll();
-        
-        this.root = new DefaultTreeNode("Names", null);
-        
-        for(int i = 0; i < contactList.size(); i++ ){
-            TreeNode name = new DefaultTreeNode(contactList.get(i).toFullName(), root);
+
+    public TreeNode createContacts() {
+        contactList = cEao.findAll(0, 9);
+
+        this.root = new DefaultTreeNode(contact, null);
+        //contact direkt in die treeNode und selected
+        for (int i = 0; i < contactList.size(); i++) {
+            TreeNode name = new DefaultTreeNode("contact", contactList.get(i), root);
             
-            TreeNode address = new DefaultTreeNode("Adresses", name);
-            TreeNode communication = new DefaultTreeNode("Communications", name);
-            
+            TreeNode address = new DefaultTreeNode("beschreibung","Adresses", name);
+            TreeNode communication = new DefaultTreeNode("beschreibung","Communications", name);
+
             //Adresses
             for (Address add : contactList.get(i).getAddresses()) {
-                TreeNode addresses = new DefaultTreeNode(add.toSingleLineString(), address);
+                TreeNode addresses = new DefaultTreeNode("address",add, address);
             }
             //Communication
             for (Communication comm : contactList.get(i).getCommunications()){
-                TreeNode communications = new DefaultTreeNode(comm.toSingleLineString(), communication);
+                TreeNode communications = new DefaultTreeNode("communication",comm, communication);
             }
         }
-        
+
         return root;
-    
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         this.root = createContacts();
     }
-    
-    public TreeNode getRoot(){
+
+    public TreeNode getRoot() {
         return root;
     }
-    
-    
+
+
 }
