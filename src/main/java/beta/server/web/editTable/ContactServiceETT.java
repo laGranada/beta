@@ -61,7 +61,7 @@ public class ContactServiceETT implements Serializable {
     
 
     public TreeNode createContacts() {
-        contactList = cEao.findAll(0, 9);
+        contactList = cEao.findAll();
 
         this.root = new DefaultTreeNode(contact, null);
         //contact direkt in die treeNode und selected
