@@ -56,7 +56,7 @@ and open the template in the editor.
                 
                 <p:growl id="msgs" showDetail="true"/>             
                 
-                <p:treeTable  style="width:1700px" value="#{contactService.root}" var="contact" editable="true" nodeVar="node">
+                <p:treeTable  style="width:1700px" value="#{contactService.root}" var="contact" editable="true" nodeVar="node" selectionMode="checkbox" selection="#{editView.selectedNodes}">
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
@@ -144,7 +144,9 @@ and open the template in the editor.
                     <!--DeleteButton-->
                     <p:column style="width:90px">
                         <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
-                        <p:commandButton type="button" title="Delete" value="Delete"/>
+                        <p:commandButton type="button" title="Delete" value="Delete">
+                            
+                        </p:commandButton>
                     </p:column>
                 </p:treeTable>
             </h:form>

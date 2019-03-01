@@ -18,6 +18,7 @@ import javax.ejb.Stateless;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.CheckboxTreeNode;
 
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
@@ -39,29 +40,12 @@ public class ContactServiceETT implements Serializable {
     private TreeNode root;
 
     private List<Contact> contactList;
-    
-
-    
+   
     private Type[] type;
-    private Country[] countries;
-
-    public List<Contact> getContactList() {
-        return contactList;
-    }
-
-
-    public Type[] getType() {
-        return type;
-    }
-
-    public Country[] getCountries() {
-        return countries;
-    }
-    
-    
+    private Country[] countries; 
 
     public TreeNode createContacts() {
-        contactList = cEao.findAll();
+        contactList = cEao.findAll(0, 10);
 
         this.root = new DefaultTreeNode(contact, null);
         //contact direkt in die treeNode und selected
@@ -85,10 +69,36 @@ public class ContactServiceETT implements Serializable {
         return root;
 
     }
+    
+    public TreeNode createCheckboxContacts() {
+        contactList = cEao.findAll(0, 10);
 
+        this.root = new CheckboxTreeNode(contact, null);
+        //contact direkt in die treeNode und selected
+        for (int i = 0; i < contactList.size(); i++) {
+            TreeNode name = new CheckboxTreeNode("contact", contactList.get(i), root);
+            
+            TreeNode communication = new CheckboxTreeNode("beschreibung","Communications", name);
+            TreeNode address = new CheckboxTreeNode("beschreibung","Adresses", name);
+            
+            //Communication
+            for (Communication comm : contactList.get(i).getCommunications()){
+                TreeNode communications = new CheckboxTreeNode("communication",comm, communication);
+            }
+            //Adresses
+            for (Address add : contactList.get(i).getAddresses()) {
+                TreeNode addresses = new CheckboxTreeNode("address",add, address);
+            }
+            
+        }
+
+        return root;
+
+    }
+    
     @PostConstruct
     public void init() {
-        this.root = createContacts();
+        this.root = createCheckboxContacts();
 
         //type
         type = new Type[7];
@@ -105,9 +115,24 @@ public class ContactServiceETT implements Serializable {
         countries[1] = Country.GERMANY;
     }
 
+//    public void removeElementOfTreeNode(TreeNode nodeToDelete){
+//        nodeToDelete.getChildren().remove(nodeToDelete);
+//    }
+//    
     public TreeNode getRoot() {
         return root;
     }
 
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public Type[] getType() {
+        return type;
+    }
+
+    public Country[] getCountries() {
+        return countries;
+    }
 
 }
