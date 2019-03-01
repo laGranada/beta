@@ -77,7 +77,7 @@ public class ContactServiceETT implements Serializable {
         //contact direkt in die treeNode und selected
         for (int i = 0; i < contactList.size(); i++) {
             TreeNode name = new CheckboxTreeNode("contact", contactList.get(i), root);
-            
+
             TreeNode communication = new CheckboxTreeNode("beschreibung","Communications", name);
             TreeNode address = new CheckboxTreeNode("beschreibung","Adresses", name);
             
@@ -91,7 +91,7 @@ public class ContactServiceETT implements Serializable {
             }
             
         }
-
+        
         return root;
 
     }

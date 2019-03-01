@@ -57,13 +57,14 @@ and open the template in the editor.
                 <!--DeleteButton-->
                 <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
                 <p:commandButton style="float: right" type="button" title="Delete" value="Delete"
-                                 action="#{editView.deleteNodes(editView.selectedNodes)}"/>
+                                 action="#{editView.deleteNodes(editView.selectedNodes)}" update="#{ttId}"/>
                     
                 
                 
                 <p:growl id="msgs" showDetail="true"/>             
                 
-                <p:treeTable  style="width:1700px" value="#{contactService.root}" var="contact" editable="true" nodeVar="node" selectionMode="checkbox" selection="#{editView.selectedNodes}">
+                <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}">
+                
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
@@ -147,14 +148,8 @@ and open the template in the editor.
                     <!--Pencil-->
                     <p:column style="width:40px">
                         <p:rowEditor />
-                    </p:column>
-                    <!--DeleteButton-->
-                    <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
-                    <p:commandButton type="button" title="Delete" value="Delete">
-                            
-                    </p:commandButton>
-                    
-                </p:treeTable>
+                    </p:column>   
+                </p:treeTable>    
             </h:form>
         </div>
     </h:body>
