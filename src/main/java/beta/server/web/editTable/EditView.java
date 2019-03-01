@@ -26,33 +26,7 @@ import javax.inject.Inject;
 @ViewScoped
 @Named("editView")
 public class EditView implements Serializable {
-    
-    Communication communication = new Communication();
-//    @Inject
-//    private Country coun;
-//    
-//    private Map<String, String> countries;
-//    private String country;
-//    
-//    @PostConstruct
-//    public void init(){
-//        countries = new HashMap<String, String>();
-//        countries.put(coun.getCountryName(), coun.getIsoCode());
-//        
-//    }
-//
-//    public Map<String, String> getCountries() {
-//        return countries;
-//    }
-//
-//    public String getCountry() {
-//        return country;
-//    }
-
-   
-    
-    
-    
+      
     public void onRowEdit(RowEditEvent event){
         FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);

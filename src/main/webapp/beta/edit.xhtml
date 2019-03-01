@@ -54,14 +54,7 @@ and open the template in the editor.
             
             <h:form id="form" >
                 
-                <p:growl id="msgs" showDetail="true"/>
-
-                                 <p:panel>
-                                    <p:selectOneMenu id="country"  style="width:150px">
-                                        <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
-
-                                    </p:selectOneMenu>
-                                </p:panel>               
+                <p:growl id="msgs" showDetail="true"/>             
                 
                 <p:treeTable  style="width:1700px" value="#{contactService.root}" var="contact" editable="true" nodeVar="node">
                     <f:facet name="header">
@@ -95,10 +88,23 @@ and open the template in the editor.
                     <p:column  headerText="Communication">
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>
-                                 <f:facet name="output"><h:outputText value="#{contact.toSingleLineString()}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.toSingleLineString()}" style="width:100%"/></f:facet>
+                                 <f:facet name="output"><h:outputText value="#{contact.identifier}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.identifier}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>    
+                    </p:column>
+                    <!--Type DropDown-->
+                    <p:column headerText="Type" style="width:100px">
+                        <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
+                            <p:cellEditor>                           
+                                <f:facet name="output"><h:outputText value="#{contact.type}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{contact.type}" style="width:100%">
+                                        <f:selectItems value="#{contactService.type}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                                    </h:selectOneMenu>
+                                </f:facet>                          
+                            </p:cellEditor>
+                        </p:treeNode>
                     </p:column>
                     <!--Street-->
                     <p:column  headerText="Street">
@@ -118,13 +124,16 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Country-->
-                    <p:column  headerText="Country">
+                    <!--Country DropDown-->
+                    <p:column headerText="Country" style="width:120px">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
-                            <p:cellEditor>
-
-                                 <f:facet name="output"><h:outputText value="#{contact.country}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.country}" style="width:100%"/></f:facet>
+                            <p:cellEditor>                           
+                                <f:facet name="output"><h:outputText value="#{contact.country}" /></f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu value="#{contact.country}" style="width:100%">
+                                        <f:selectItems value="#{contactService.countries}" var="type" itemLabel="#{country}" itemValue="#{country}" />
+                                    </h:selectOneMenu>
+                                </f:facet>                          
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
