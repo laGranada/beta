@@ -5,7 +5,7 @@
  */
 package beta.server.web.editTable;
 
-import beta.server.entity.Communication;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -13,11 +13,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.TreeNode;
-import beta.server.entity.Country;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 /**
  *
@@ -46,26 +41,16 @@ public class EditView implements Serializable {
         this.selectedNodes = selectedNodes;
     }
     
-    public void displaySelectedSingle() {
-        if(selectedNode != null) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", selectedNode.getData().toString());
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
-    }
-     
-    public void displaySelectedMultiple(TreeNode[] nodes) {
-        if(nodes != null && nodes.length > 0) {
-            StringBuilder builder = new StringBuilder();
- 
-            for(TreeNode node : nodes) {
-                builder.append(node.getData().toString());
-                builder.append("<br />");
+    public void deleteNodes(TreeNode[] nodes){
+        if(nodes != null && nodes.length > 0){
+            for(int i = 0; i < nodes.length; i++){
+                TreeNode parent = nodes[i].getParent();
+                parent.getChildren().remove(nodes[i]);
             }
- 
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", builder.toString());
-            FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        
     }
+
       
     public void onRowEdit(RowEditEvent event){
         FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
