@@ -20,19 +20,7 @@ and open the template in the editor.
         .content {
           max-width: 1700px;
           margin: auto;
-        }
-        .ui-row-editor .ui-row-editor-pencil {
-                margin-left:8px;
-            }
-
-            .ui-editable-column .ui-cell-editor-input {
-                overflow: hidden;
-            }
-
-            .ui-editable-column .ui-cell-editor-input * {
-                box-sizing: border-box;
-            }
-            
+        }             
     </style>
     
     <h:head>
@@ -55,10 +43,10 @@ and open the template in the editor.
             <h:form id="form" >
                 
                 <!--DeleteButton-->
-                <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
                 <p:commandButton style="float: right" type="button" title="Delete" value="Delete">
                     <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" />
                 </p:commandButton>
+                <!--Edit-Button-->
                 <p:commandButton value="Edit" type="button" onclick="PF('dlg').show();"/>
 
                 <!-- used to display FacesMessages-->
