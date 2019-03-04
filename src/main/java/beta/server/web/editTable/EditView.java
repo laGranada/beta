@@ -22,25 +22,31 @@ import org.primefaces.model.TreeNode;
 @Named("editView")
 public class EditView implements Serializable {
     
-    private TreeNode selectedNode;
+    
     private TreeNode[] selectedNodes;
     
-    public TreeNode getSelectedNode() {
-        return selectedNode;
-    }
- 
-    public void setSelectedNode(TreeNode selectedNode) {
-        this.selectedNode = selectedNode;
-    }
-    
+    /**
+     *
+     * @return
+     */
     public TreeNode[] getSelectedNodes() {
         return selectedNodes;
     }
  
+    /**
+     *
+     * @param selectedNodes
+     */
     public void setSelectedNodes(TreeNode[] selectedNodes) {
         this.selectedNodes = selectedNodes;
     }
     
+    /**
+     *take parent of node
+     * go through children of parent
+     * and then remove selected node from children
+     * @param nodes
+     */
     public void deleteNodes(TreeNode[] nodes){
         if(nodes != null && nodes.length > 0){
             for(int i = 0; i < nodes.length; i++){
@@ -51,16 +57,25 @@ public class EditView implements Serializable {
         
     }
 
-      
+    /**
+     *
+     * @param event
+     */
     public void onRowEdit(RowEditEvent event){
         FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    /**
+     *
+     * @param event
+     */
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        
     }
-
+    
 
 }

@@ -13,6 +13,7 @@ import beta.server.entity.Contact;
 import beta.server.entity.Country;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
@@ -24,7 +25,8 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 /**
- *
+ * access the the database
+ * creates the treeTable
  * @author margarita.dueck
  */
 @Stateless
@@ -41,45 +43,23 @@ public class ContactServiceETT implements Serializable {
 
     private List<Contact> contactList;
    
-    private Type[] type;
+    private Type[] types;
     private Country[] countries; 
-
-    public TreeNode createContacts() {
-        contactList = cEao.findAll(0, 10);
-
-        this.root = new DefaultTreeNode(contact, null);
-        //contact direkt in die treeNode und selected
-        for (int i = 0; i < contactList.size(); i++) {
-            TreeNode name = new DefaultTreeNode("contact", contactList.get(i), root);
-            
-            TreeNode communication = new DefaultTreeNode("beschreibung","Communications", name);
-            TreeNode address = new DefaultTreeNode("beschreibung","Adresses", name);
-            
-            //Communication
-            for (Communication comm : contactList.get(i).getCommunications()){
-                TreeNode communications = new DefaultTreeNode("communication",comm, communication);
-            }
-            //Adresses
-            for (Address add : contactList.get(i).getAddresses()) {
-                TreeNode addresses = new DefaultTreeNode("address",add, address);
-            }
-            
-        }
-
-        return root;
-
-    }
     
+    /**
+     * creates a CheckboxTreeNodes with contacts 
+     * @return
+     */
     public TreeNode createCheckboxContacts() {
         contactList = cEao.findAll(0, 10);
 
         this.root = new CheckboxTreeNode(contact, null);
-        //contact direkt in die treeNode und selected
+        
         for (int i = 0; i < contactList.size(); i++) {
             TreeNode name = new CheckboxTreeNode("contact", contactList.get(i), root);
-
-            TreeNode communication = new CheckboxTreeNode("beschreibung","Communications", name);
-            TreeNode address = new CheckboxTreeNode("beschreibung","Adresses", name);
+            
+            TreeNode communication = new CheckboxTreeNode("description","Communications", name);
+            TreeNode address = new CheckboxTreeNode("description","Adresses", name);
             
             //Communication
             for (Communication comm : contactList.get(i).getCommunications()){
@@ -89,48 +69,63 @@ public class ContactServiceETT implements Serializable {
             for (Address add : contactList.get(i).getAddresses()) {
                 TreeNode addresses = new CheckboxTreeNode("address",add, address);
             }
-            
         }
         
         return root;
 
     }
     
+    /**
+     * init-Method
+     */
     @PostConstruct
     public void init() {
         this.root = createCheckboxContacts();
 
         //type
-        type = new Type[7];
-        type[0] = Type.EMAIL;
-        type[1] = Type.FACEBOOK;
-        type[2] = Type.FAX;
-        type[3] = Type.ICQ;
-        type[4] = Type.MOBILE;
-        type[5] = Type.PHONE;
-        type[6] = Type.SKYPE;
+        types = new Type[7];
+        types[0] = Type.EMAIL;
+        types[1] = Type.FACEBOOK;
+        types[2] = Type.FAX;
+        types[3] = Type.ICQ;
+        types[4] = Type.MOBILE;
+        types[5] = Type.PHONE;
+        types[6] = Type.SKYPE;
         //country
         countries = new Country[2];
         countries[0] = Country.AUSTRIA;
         countries[1] = Country.GERMANY;
     }
 
-//    public void removeElementOfTreeNode(TreeNode nodeToDelete){
-//        nodeToDelete.getChildren().remove(nodeToDelete);
-//    }
-//    
+    /**
+     *
+     * @return
+     */
+    
     public TreeNode getRoot() {
         return root;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Contact> getContactList() {
         return contactList;
     }
 
+    /**
+     *
+     * @return
+     */
     public Type[] getType() {
-        return type;
+        return types;
     }
 
+    /**
+     *
+     * @return
+     */
     public Country[] getCountries() {
         return countries;
     }

@@ -56,21 +56,24 @@ and open the template in the editor.
                 
                 <!--DeleteButton-->
                 <!--<button class="btn"><i class="fa fa-trash"></i></button>-->
-                <p:commandButton style="float: right" type="button" title="Delete" value="Delete"
-                                 action="#{editView.deleteNodes(editView.selectedNodes)}" update="#{ttId}"/>
-                    
-                
-                
+                <p:commandButton style="float: right" type="button" title="Delete" value="Delete">
+                    <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" />
+                </p:commandButton>
+                <p:commandButton value="Edit" type="button" onclick="PF('dlg').show();"/>
+
+                <!-- used to display FacesMessages-->
                 <p:growl id="msgs" showDetail="true"/>             
                 
-                <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}">
+                <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" 
+                              nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}">
                 
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
-                    
-                    <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs" />
+                    <!--RowEdit events-->
+                    <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
+                    
                     <!--FirstName-->
                     <p:column  headerText="First name">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
@@ -79,7 +82,7 @@ and open the template in the editor.
                                 <f:facet name="input"><p:inputText value="#{contact.firstName}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode> 
-                        <p:treeNode type="beschreibung" rendered="#{node.type == 'beschreibung'}">
+                        <p:treeNode type="description" rendered="#{node.type == 'description'}">
                             <h:outputText value="#{contact}"></h:outputText>
                         </p:treeNode>
                     </p:column>
@@ -145,11 +148,26 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Pencil-->
-                    <p:column style="width:40px">
+                    <!--Edit-->
+                    <p:column headerText="Edit" style="width:40px">
                         <p:rowEditor />
                     </p:column>   
-                </p:treeTable>    
+                </p:treeTable>  
+                
+                <!--Dialog-->
+                <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false">
+                    <h:panelGrid columns="1">
+                       <h:outputLabel value="First Name: "/>
+                        <p:inputText value="#{contact.firstName}"/>
+
+                        <h:outputLabel value="Last Name: "/>
+                        <p:inputText value="#{contact.lastName}"/>
+
+                        <p:commandButton style="float: right" type="button" title="Save" value="Save"/> 
+                    </h:panelGrid>
+                    
+                </p:dialog>
+                
             </h:form>
         </div>
     </h:body>
