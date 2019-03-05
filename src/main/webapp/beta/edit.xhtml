@@ -164,8 +164,8 @@ and open the template in the editor.
                         <p:inputText placeholder="#{editView.selectedContact.firstName}" value="#{editView.selectedContact.firstName}"/>
                         <!--Last Name-->
                         <h:outputLabel value="Last Name: "/>
-                        <p:inputText placeholder="#{editView.selectedContact.lastName}" value="#{contact.lastName}"/>
-                        <p:commandButton style="float: right" title="Save" value="Save" process="@this" update="@form:ttId" onclick="PF('dlg').hide()"/> 
+                        <p:inputText placeholder="#{editView.selectedContact.lastName}" value="#{editView.selectedContact.lastName}"/>
+                        <p:commandButton style="float: right" title="Save" value="Save" type="submit" update="@form:ttId" onclick="PF('dlg').hide()"/> 
                     </h:panelGrid>                    
                 </p:dialog>                
             </h:form>
