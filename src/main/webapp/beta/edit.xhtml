@@ -40,9 +40,8 @@ and open the template in the editor.
                 by Maggie<i class="fa fa-trash"></i>
             </h3>
             
-            <h:form id="form" >
-                
-                <!--DeleteButton-->
+            <h:form id="form" >                
+                <!-- =======================     DELETE BUTTON      ========================== -->
                 <p:commandButton style="float: right" type="button" title="Delete" value="Delete">
                     <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" />
                 </p:commandButton>
@@ -50,17 +49,22 @@ and open the template in the editor.
                 <!-- used to display FacesMessages-->
                 <p:growl id="msgs" showDetail="true"/>             
                 
+                <!-- ========================================================================= -->
+                <!-- =======================       TREETABLE        ========================== -->
+                <!-- ========================================================================= -->
                 <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" 
                               nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}">
                 
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
-                    <!--RowEdit events-->
+
+                    <!-- =======================     ROWEDIT EVENTS     ========================== -->
                     <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
                     
-                    <!--FirstName-->
+                    
+                    <!-- =======================    FIRST NAME    ========================== -->
                     <p:column  headerText="First name">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <p:cellEditor>                           
@@ -72,7 +76,7 @@ and open the template in the editor.
                             <h:outputText value="#{contact}"></h:outputText>
                         </p:treeNode>
                     </p:column>
-                    <!--LastName-->
+                    <!-- =======================       LAST NAME        ========================== -->
                     <p:column   headerText="Last name">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <p:cellEditor>
@@ -81,7 +85,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>     
                     </p:column>
-                    <!--Communication-->
+                    <!-- =======================     COMMUNICATION      ========================== -->
                     <p:column  headerText="Communication">
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>
@@ -90,7 +94,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>    
                     </p:column>
-                    <!--Type DropDown-->
+                    <!-- =======================     TYPE DROPDOWN      ========================== -->
                     <p:column headerText="Type" style="width:100px">
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>                           
@@ -103,7 +107,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Street-->
+                    <!-- =======================         STREET         ========================== -->
                     <p:column  headerText="Street">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
@@ -112,7 +116,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Zip-->
+                    <!-- =======================        ZIP CODE        ========================== -->
                     <p:column  headerText="Zip code">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
@@ -121,7 +125,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Country DropDown-->
+                    <!-- =======================    COUNTRY DROPDOWN    ========================== -->
                     <p:column headerText="Country" style="width:120px">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>                           
@@ -134,7 +138,7 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!--Edit-->
+                    <!-- =======================        ROWEDITOR       ========================== -->>
                     <p:column headerText="Edit" style="width:40px">
                         <!--Communication rowEditor-->
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
@@ -145,7 +149,7 @@ and open the template in the editor.
                             <p:rowEditor />
                         </p:treeNode>  
                     </p:column> 
-                    <!--Dialog edit-->
+                    <!-- =======================      EDIT BUTTON       ========================== -->
                     <p:column headerText="Edit Dialog" style="width:90px">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <!--Edit-Button-->
@@ -156,7 +160,9 @@ and open the template in the editor.
                     </p:column>
                 </p:treeTable>  
                 
-                <!--Dialog-->
+                <!-- ========================================================================= -->
+                <!-- =======================    EDIT NAME DIALOG    ========================== -->
+                <!-- ========================================================================= -->
                 <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false" >
                     <h:panelGrid id="dlgPanel" columns="1">
                         <!--First Name-->
