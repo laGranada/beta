@@ -46,8 +46,6 @@ and open the template in the editor.
                 <p:commandButton style="float: right" type="button" title="Delete" value="Delete">
                     <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" />
                 </p:commandButton>
-                <!--Edit-Button-->
-                <p:commandButton value="Edit" type="button" onclick="PF('dlg').show();"/>
 
                 <!-- used to display FacesMessages-->
                 <p:growl id="msgs" showDetail="true"/>             
@@ -138,20 +136,33 @@ and open the template in the editor.
                     </p:column>
                     <!--Edit-->
                     <p:column headerText="Edit" style="width:40px">
-                        <p:rowEditor />
-                    </p:column>   
+                        <!--Communication rowEditor-->
+                        <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
+                            <p:rowEditor />
+                        </p:treeNode>  
+                        <!--Address rowEditor-->
+                        <p:treeNode type="address" rendered="#{node.type == 'address'}">
+                            <p:rowEditor />
+                        </p:treeNode>  
+                    </p:column> 
+                    <p:column headerText="Edit Dialog" style="width:90px">
+                        <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
+                            <!--Edit-Button-->
+                            <p:commandButton value="Edit" type="button" onclick="PF('dlg').show();"/>
+                        </p:treeNode>     
+                    </p:column>
                 </p:treeTable>  
                 
                 <!--Dialog-->
                 <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false">
                     <h:panelGrid columns="1">
                        <h:outputLabel value="First Name: "/>
-                        <p:inputText value="#{contact.firstName}"/>
+                        <p:inputText placeholder="#{contact.firstName}" value="#{contact.firstName}"/>
 
                         <h:outputLabel value="Last Name: "/>
                         <p:inputText value="#{contact.lastName}"/>
 
-                        <p:commandButton style="float: right" type="button" title="Save" value="Save"/> 
+                        <p:commandButton style="float: right" type="button" title="Save" value="Save" update="ttId"/> 
                     </h:panelGrid>
                     
                 </p:dialog>
