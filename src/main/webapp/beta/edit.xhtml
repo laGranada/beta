@@ -148,25 +148,25 @@ and open the template in the editor.
                     <p:column headerText="Edit Dialog" style="width:90px">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <!--Edit-Button-->
-                            <p:commandButton value="Edit" type="button" onclick="PF('dlg').show();"/>
+                            <p:commandButton value="Edit" type="button" action="result" onclick="PF('dlg').show()" update="dlgPanel">
+                                <f:setPropertyActionListener value="#{contact}" target="#{editView.selectedContact}"/>
+                            </p:commandButton>
                         </p:treeNode>     
                     </p:column>
                 </p:treeTable>  
                 
-                <!--Dialog-->
-                <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false">
-                    <h:panelGrid columns="1">
-                       <h:outputLabel value="First Name: "/>
-                        <p:inputText placeholder="#{contact.firstName}" value="#{contact.firstName}"/>
-
+                    <!--Dialog-->
+                <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false" >
+                    <h:panelGrid id="dlgPanel" columns="1" >
+                        <!--First Name-->
+                        <h:outputLabel value="#{editView.selectedContact.firstName}"/> 
+                        <p:inputText placeholder="#{editView.selectedContact.firstName}" value="#{contact.firstName}"/>
+                        <!--Last Name-->
                         <h:outputLabel value="Last Name: "/>
                         <p:inputText value="#{contact.lastName}"/>
-
-                        <p:commandButton style="float: right" type="button" title="Save" value="Save" update="ttId"/> 
-                    </h:panelGrid>
-                    
-                </p:dialog>
-                
+                        <p:commandButton style="float: right" type="button" title="Save" value="Save" update="ttId" onclick="PF('dlg').hide()"/> 
+                    </h:panelGrid>                    
+                </p:dialog>                
             </h:form>
         </div>
     </h:body>

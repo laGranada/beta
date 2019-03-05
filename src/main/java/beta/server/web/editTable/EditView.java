@@ -5,12 +5,14 @@
  */
 package beta.server.web.editTable;
 
+import beta.server.entity.Contact;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.TreeNode;
 
@@ -22,8 +24,17 @@ import org.primefaces.model.TreeNode;
 @Named("editView")
 public class EditView implements Serializable {
     
-    
+    private Contact selectedContact;
     private TreeNode[] selectedNodes;
+
+    
+    public Contact getSelectedContact() {
+        return selectedContact;
+    }
+
+    public void setSelectedContact(Contact selectedContact) {
+        this.selectedContact = selectedContact;
+    }
     
     /**
      *
@@ -56,7 +67,11 @@ public class EditView implements Serializable {
         }
         
     }
-
+   
+    public void save(ActionEvent actionEvent){
+        RequestContext context = RequestContext.getCurrentInstance();
+    }
+    
     /**
      *
      * @param event
