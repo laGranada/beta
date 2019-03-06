@@ -17,7 +17,8 @@ import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.TreeNode;
 
 /**
- *
+ * Selection for TreeTable
+ * 
  * @author margarita.dueck
  */
 @ViewScoped
@@ -26,12 +27,53 @@ public class EditView implements Serializable {
     
     private Contact selectedContact;
     private TreeNode[] selectedNodes;
-
     
+    
+    /**
+     * get parent of node
+     * go through children of parent
+     * and then remove selected node from children
+     * @param nodes
+     */
+    public void deleteNodes(TreeNode[] nodes){
+        if(nodes != null && nodes.length > 0){
+            for(int i = 0; i < nodes.length; i++){
+                TreeNode parent = nodes[i].getParent();
+                parent.getChildren().remove(nodes[i]);
+            }
+        }        
+    }
+    
+    /**
+     *
+     * @param event
+     */
+    public void onRowEdit(RowEditEvent event){
+        FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    /**
+     *
+     * @param event
+     */
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((TreeNode) event.getObject()).toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);    
+    }
+    
+    /**
+     *
+     * @return
+     */
     public Contact getSelectedContact() {
         return selectedContact;
     }
 
+    /**
+     *
+     * @param selectedContact
+     */
     public void setSelectedContact(Contact selectedContact) {
         this.selectedContact = selectedContact;
     }
@@ -52,45 +94,4 @@ public class EditView implements Serializable {
         this.selectedNodes = selectedNodes;
     }
     
-    /**
-     *take parent of node
-     * go through children of parent
-     * and then remove selected node from children
-     * @param nodes
-     */
-    public void deleteNodes(TreeNode[] nodes){
-        if(nodes != null && nodes.length > 0){
-            for(int i = 0; i < nodes.length; i++){
-                TreeNode parent = nodes[i].getParent();
-                parent.getChildren().remove(nodes[i]);
-            }
-        }
-        
-    }
-   
-    public void save(ActionEvent actionEvent){
-        RequestContext context = RequestContext.getCurrentInstance();
-    }
-    
-    /**
-     *
-     * @param event
-     */
-    public void onRowEdit(RowEditEvent event){
-        FacesMessage msg = new FacesMessage("Contact Edited", ((TreeNode) event.getObject()).toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-    
-    /**
-     *
-     * @param event
-     */
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", ((TreeNode) event.getObject()).toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        
-        
-    }
-    
-
 }

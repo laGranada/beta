@@ -43,6 +43,7 @@ public class ContactServiceETT implements Serializable {
 
     private List<Contact> contactList;
    
+    //Arrays for Dropdown
     private Type[] types;
     private Country[] countries; 
     
@@ -56,8 +57,10 @@ public class ContactServiceETT implements Serializable {
         this.root = new CheckboxTreeNode(contact, null);
         
         for (int i = 0; i < contactList.size(); i++) {
+            //Names
             TreeNode name = new CheckboxTreeNode("contact", contactList.get(i), root);
             
+            //Description
             TreeNode communication = new CheckboxTreeNode("description","Communications", name);
             TreeNode address = new CheckboxTreeNode("description","Adresses", name);
             
@@ -76,7 +79,10 @@ public class ContactServiceETT implements Serializable {
     }
     
     /**
-     * init-Method
+     * init-Method for:
+     *  - root
+     *  - types[]
+     *  - countries[]
      */
     @PostConstruct
     public void init() {

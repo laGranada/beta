@@ -28,29 +28,35 @@ and open the template in the editor.
     
     <h:head>
         <title>Contacts</title>
-    </h:head>       
+        <!-- LINK FOR ICONS -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    </h:head>   
+    
+     
     <!-- ========================================================================= -->
     <!-- =======================         BODY           ========================== -->
     <!-- ========================================================================= -->
     <h:body>
-        <div class="content">    
+        <div class="content">
             <h1 algin="center">
                 Contactinformations
             </h1>
             
+            <!-- LINK TO CONTACT SECTION -->
             <h:link target="_blank" rel="noopener noreferrer" outcome="contactSection" value="Contact us" /> <br />
             
             <h3 align="left" style="color: purple">
                 by Maggie<i class="fa fa-trash"></i>
             </h3>
             
-            <h:form id="form" >                
-                <!-- =======================     DELETE BUTTON      ========================== -->
-                <p:commandButton style="float: right" type="button" title="Delete" value="Delete">
-                    <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" />
-                </p:commandButton>
+            <h:form id="form" >  
+                <!-- =======================      DELETE LINK       ========================== -->
+                <p:commandLink style="float: right"  >
+                    <i class="material-icons" style="font-size:36px;color:purple">delete</i>
+                    <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" /> 
+                </p:commandLink>
 
-                <!-- used to display FacesMessages-->
+                <!-- USED TO DISPLAY FACESMESSAGES -->
                 <p:growl id="msgs" showDetail="true"/>             
                 
                 <!-- ========================================================================= -->
@@ -144,26 +150,24 @@ and open the template in the editor.
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
-                    <!-- =======================        ROWEDITOR       ========================== -->>
+                    <!-- =======================EDIT LINK AND ROWEDITOR ========================== -->
                     <p:column headerText="Edit" style="width:40px">
-                        <!--Communication rowEditor-->
+                        <!-- EDIT LINK -->
+                        <p:treeNode type="contact" rendered="#{node.type == 'contact'}">                           
+                            <p:commandLink process="@this" onclick="PF('dlg').show()" update="@form:dlgPanel">
+                                <i class="material-icons" style="font-size:15px;color:purple">edit</i>
+                                <f:setPropertyActionListener value="#{contact}" target="#{editView.selectedContact}"/>
+                            </p:commandLink>
+                        </p:treeNode>  
+                        <!-- COMMUNICATION ROWEDITOR -->
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:rowEditor />
                         </p:treeNode>  
-                        <!--Address rowEditor-->
+                        <!-- ADDRESS ROWEDITOR -->
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:rowEditor />
                         </p:treeNode>  
                     </p:column> 
-                    <!-- =======================      EDIT BUTTON       ========================== -->
-                    <p:column headerText="Edit Dialog" style="width:90px">
-                        <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
-                            <!--Edit-Button-->
-                            <p:commandButton value="Edit" process="@this" onclick="PF('dlg').show()" update="@form:dlgPanel">
-                                <f:setPropertyActionListener value="#{contact}" target="#{editView.selectedContact}"/>
-                            </p:commandButton>
-                        </p:treeNode>     
-                    </p:column>
                 </p:treeTable>  
                 
                 <!-- ========================================================================= -->
@@ -171,13 +175,16 @@ and open the template in the editor.
                 <!-- ========================================================================= -->
                 <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false">
                     <h:panelGrid id="dlgPanel" columns="1" >
-                        <!--First Name-->
+                        <!-- FIRST NAME -->
                         <h:outputLabel value="First Name: "/> 
                         <p:inputText placeholder="#{editView.selectedContact.firstName}" value="#{editView.selectedContact.firstName}"/>
-                        <!--Last Name-->
+                        <!-- LAST NAME -->
                         <h:outputLabel value="Last Name: "/>
                         <p:inputText placeholder="#{editView.selectedContact.lastName}" value="#{editView.selectedContact.lastName}"/>
-                        <p:commandButton style="float: right" title="Save" value="Save" type="submit" update="@form:ttId" onclick="PF('dlg').hide()"/> 
+                         
+                        <p:commandLink style="float: right" type="submit" update="@form:ttId" onclick="PF('dlg').hide()">
+                            <i class="material-icons" style="font-size:40px;color:purple">save</i>
+                        </p:commandLink>
                     </h:panelGrid>                    
                 </p:dialog>                
             </h:form>
