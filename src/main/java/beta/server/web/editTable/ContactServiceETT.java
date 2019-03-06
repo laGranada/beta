@@ -36,8 +36,7 @@ public class ContactServiceETT implements Serializable {
     @Inject
     private ContactEao cEao;
 
-    @Inject
-    private Contact contact;
+
 
     private TreeNode root;
 
@@ -54,7 +53,7 @@ public class ContactServiceETT implements Serializable {
     public TreeNode createCheckboxContacts() {
         contactList = cEao.findAll();
 
-        this.root = new CheckboxTreeNode(contact, null);
+        this.root = new CheckboxTreeNode(" ", null);
         
         for (int i = 0; i < contactList.size(); i++) {
             //Names
@@ -66,11 +65,11 @@ public class ContactServiceETT implements Serializable {
             
             //Communication
             for (Communication comm : contactList.get(i).getCommunications()){
-                TreeNode communications = new CheckboxTreeNode("communication",comm, communication);
+               new CheckboxTreeNode("communication",comm, communication);
             }
             //Adresses
             for (Address add : contactList.get(i).getAddresses()) {
-                TreeNode addresses = new CheckboxTreeNode("address",add, address);
+                new CheckboxTreeNode("address",add, address);
             }
         }
         
@@ -89,49 +88,24 @@ public class ContactServiceETT implements Serializable {
         this.root = createCheckboxContacts();
 
         //type
-        types = new Type[7];
-        types[0] = Type.EMAIL;
-        types[1] = Type.FACEBOOK;
-        types[2] = Type.FAX;
-        types[3] = Type.ICQ;
-        types[4] = Type.MOBILE;
-        types[5] = Type.PHONE;
-        types[6] = Type.SKYPE;
+        types = Type.values();
+        
         //country
-        countries = new Country[2];
-        countries[0] = Country.AUSTRIA;
-        countries[1] = Country.GERMANY;
+        countries = Country.values();
     }
 
-    /**
-     *
-     * @return
-     */
-    
     public TreeNode getRoot() {
         return root;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Contact> getContactList() {
         return contactList;
     }
 
-    /**
-     *
-     * @return
-     */
     public Type[] getType() {
         return types;
     }
 
-    /**
-     *
-     * @return
-     */
     public Country[] getCountries() {
         return countries;
     }

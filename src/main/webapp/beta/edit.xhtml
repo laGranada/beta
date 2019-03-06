@@ -93,7 +93,7 @@ and open the template in the editor.
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{contact.lastName}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.lastName}" style="width:100%"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.lastName}"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>     
                     </p:column>
@@ -102,7 +102,7 @@ and open the template in the editor.
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{contact.identifier}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.identifier}" style="width:100%"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.identifier}" style="width:95%" /></f:facet>
                             </p:cellEditor>
                         </p:treeNode>    
                     </p:column>
@@ -124,7 +124,7 @@ and open the template in the editor.
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{contact.street}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.street}" style="width:100%"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.street}" style="width:95%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
@@ -133,7 +133,7 @@ and open the template in the editor.
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
                                 <f:facet name="output"><h:outputText value="#{contact.zipCode}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{contact.zipCode}" style="width:100%"/></f:facet>
+                                <f:facet name="input"><p:inputText value="#{contact.zipCode}" style="width:95%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>
                     </p:column>
@@ -177,10 +177,11 @@ and open the template in the editor.
                     <h:panelGrid id="dlgPanel" columns="1" >
                         <!-- FIRST NAME -->
                         <h:outputLabel value="First Name: "/> 
-                        <p:inputText placeholder="#{editView.selectedContact.firstName}" value="#{editView.selectedContact.firstName}"/>
+                        <!-- rendered damit er es nur anzeigt wenn editView.selectedContact.firstName != null ist-->
+                        <p:inputText rendered="#{editView.selectedContact != null}" value="#{editView.selectedContact.firstName}"/>
                         <!-- LAST NAME -->
                         <h:outputLabel value="Last Name: "/>
-                        <p:inputText placeholder="#{editView.selectedContact.lastName}" value="#{editView.selectedContact.lastName}"/>
+                        <p:inputText rendered="#{editView.selectedContact != null}" value="#{editView.selectedContact.lastName}"/>
 
                         <p:commandLink style="float: right" type="submit" update="@form:ttId" onclick="PF('dlg').hide()">
                             <i class="material-icons" style="font-size:40px;color:purple">save</i>

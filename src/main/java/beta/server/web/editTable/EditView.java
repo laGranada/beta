@@ -61,35 +61,19 @@ public class EditView implements Serializable {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((TreeNode) event.getObject()).toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);    
     }
-    
-    /**
-     *
-     * @return
-     */
+
     public Contact getSelectedContact() {
         return selectedContact;
     }
 
-    /**
-     *
-     * @param selectedContact
-     */
     public void setSelectedContact(Contact selectedContact) {
         this.selectedContact = selectedContact;
     }
-    
-    /**
-     *
-     * @return
-     */
+
     public TreeNode[] getSelectedNodes() {
         return selectedNodes;
     }
- 
-    /**
-     *
-     * @param selectedNodes
-     */
+
     public void setSelectedNodes(TreeNode[] selectedNodes) {
         this.selectedNodes = selectedNodes;
     }
