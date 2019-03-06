@@ -7,32 +7,32 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-        href="https://www.w3schools.com/w3css/4/w3.css">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      href="https://www.w3schools.com/w3css/4/w3.css">
 
-     <!-- will center the website on screens that are wider than 800px -->
+    <!-- will center the website on screens that are wider than 800px -->
     <style>
         body{
             background: #E6E6FA;
         }
         .content {
-          max-width: 1700px;
-          margin: auto;
+            max-width: 1700px;
+            margin: auto;
         }
         .ui-dialog.ui-widget-content{
             background-color: #E6E6FA;
         }
     </style>
-    
+
     <h:head>
         <title>Contacts</title>
         <!-- LINK FOR ICONS -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     </h:head>   
-    
-     
+
+
     <!-- ========================================================================= -->
     <!-- =======================         BODY           ========================== -->
     <!-- ========================================================================= -->
@@ -41,14 +41,14 @@ and open the template in the editor.
             <h1 algin="center">
                 Contactinformations
             </h1>
-            
+
             <!-- LINK TO CONTACT SECTION -->
             <h:link target="_blank" rel="noopener noreferrer" outcome="contactSection" value="Contact us" /> <br />
-            
+
             <h3 align="left" style="color: purple">
                 by Maggie<i class="fa fa-trash"></i>
             </h3>
-            
+
             <h:form id="form" >  
                 <!-- =======================      DELETE LINK       ========================== -->
                 <p:commandLink style="float: right"  >
@@ -58,14 +58,14 @@ and open the template in the editor.
 
                 <!-- USED TO DISPLAY FACESMESSAGES -->
                 <p:growl id="msgs" showDetail="true"/>             
-                
+
                 <!-- ========================================================================= -->
                 <!-- =======================       TREETABLE        ========================== -->
                 <!-- ========================================================================= -->
                 <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" 
                               nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}" 
-                              paginator="true" rows="10">
-                
+                              paginator="true" paginatorPosition="button" rows="10">
+
                     <f:facet name="header">
                         Contacts
                     </f:facet>   
@@ -73,13 +73,13 @@ and open the template in the editor.
                     <!-- =======================     ROWEDIT EVENTS     ========================== -->
                     <p:ajax event="rowEdit" listener="#{editView.onRowEdit}" update=":form:msgs"/>
                     <p:ajax event="rowEditCancel" listener="#{editView.onRowCancel}" update=":form:msgs" />
-                    
-                    
+
+
                     <!-- =======================    FIRST NAME    ========================== -->
                     <p:column  headerText="First name">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <p:cellEditor>                           
-                                 <f:facet name="output"><h:outputText value="#{contact.firstName}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{contact.firstName}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{contact.firstName}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode> 
@@ -92,7 +92,7 @@ and open the template in the editor.
                     <p:column   headerText="Last name">
                         <p:treeNode type="contact" rendered="#{node.type == 'contact'}">
                             <p:cellEditor>
-                                 <f:facet name="output"><h:outputText value="#{contact.lastName}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{contact.lastName}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{contact.lastName}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>     
@@ -101,7 +101,7 @@ and open the template in the editor.
                     <p:column  headerText="Communication" style="width:180px">
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>
-                                 <f:facet name="output"><h:outputText value="#{contact.identifier}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{contact.identifier}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{contact.identifier}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>    
@@ -123,7 +123,7 @@ and open the template in the editor.
                     <p:column  headerText="Street">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
-                                 <f:facet name="output"><h:outputText value="#{contact.street}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{contact.street}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{contact.street}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>
@@ -132,7 +132,7 @@ and open the template in the editor.
                     <p:column  headerText="Zip code" style="width:150px">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
-                                 <f:facet name="output"><h:outputText value="#{contact.zipCode}" /></f:facet>
+                                <f:facet name="output"><h:outputText value="#{contact.zipCode}" /></f:facet>
                                 <f:facet name="input"><p:inputText value="#{contact.zipCode}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode>
@@ -169,7 +169,7 @@ and open the template in the editor.
                         </p:treeNode>  
                     </p:column> 
                 </p:treeTable>  
-                
+
                 <!-- ========================================================================= -->
                 <!-- =======================    EDIT NAME DIALOG    ========================== -->
                 <!-- ========================================================================= -->
@@ -181,7 +181,7 @@ and open the template in the editor.
                         <!-- LAST NAME -->
                         <h:outputLabel value="Last Name: "/>
                         <p:inputText placeholder="#{editView.selectedContact.lastName}" value="#{editView.selectedContact.lastName}"/>
-                         
+
                         <p:commandLink style="float: right" type="submit" update="@form:ttId" onclick="PF('dlg').hide()">
                             <i class="material-icons" style="font-size:40px;color:purple">save</i>
                         </p:commandLink>
