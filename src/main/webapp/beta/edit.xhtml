@@ -20,13 +20,18 @@ and open the template in the editor.
         .content {
           max-width: 1700px;
           margin: auto;
-        }             
+        }
+        .ui-dialog.ui-widget-content{
+            background-color: #E6E6FA;
+        }
     </style>
     
     <h:head>
         <title>Contacts</title>
     </h:head>       
-    
+    <!-- ========================================================================= -->
+    <!-- =======================         BODY           ========================== -->
+    <!-- ========================================================================= -->
     <h:body>
         <div class="content">    
             <h1 algin="center">
@@ -52,7 +57,8 @@ and open the template in the editor.
                 <!-- =======================       TREETABLE        ========================== -->
                 <!-- ========================================================================= -->
                 <p:treeTable  style="width:1700px" resizableColumns="true" value="#{contactService.root}" var="contact" editable="true" 
-                              nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}">
+                              nodeVar="node" id="ttId" selectionMode="checkbox" selection="#{editView.selectedNodes}" 
+                              paginator="true" rows="10">
                 
                     <f:facet name="header">
                         Contacts
@@ -71,6 +77,7 @@ and open the template in the editor.
                                 <f:facet name="input"><p:inputText value="#{contact.firstName}" style="width:100%"/></f:facet>
                             </p:cellEditor>
                         </p:treeNode> 
+                        <!-- =======================      DESCRIPTION       ========================== -->
                         <p:treeNode type="description" rendered="#{node.type == 'description'}">
                             <h:outputText value="#{contact}"></h:outputText>
                         </p:treeNode>
@@ -85,7 +92,7 @@ and open the template in the editor.
                         </p:treeNode>     
                     </p:column>
                     <!-- =======================     COMMUNICATION      ========================== -->
-                    <p:column  headerText="Communication">
+                    <p:column  headerText="Communication" style="width:180px">
                         <p:treeNode type="communication" rendered="#{node.type == 'communication'}">
                             <p:cellEditor>
                                  <f:facet name="output"><h:outputText value="#{contact.identifier}" /></f:facet>
@@ -116,7 +123,7 @@ and open the template in the editor.
                         </p:treeNode>
                     </p:column>
                     <!-- =======================        ZIP CODE        ========================== -->
-                    <p:column  headerText="Zip code">
+                    <p:column  headerText="Zip code" style="width:150px">
                         <p:treeNode type="address" rendered="#{node.type == 'address'}">
                             <p:cellEditor>
                                  <f:facet name="output"><h:outputText value="#{contact.zipCode}" /></f:facet>
@@ -162,8 +169,8 @@ and open the template in the editor.
                 <!-- ========================================================================= -->
                 <!-- =======================    EDIT NAME DIALOG    ========================== -->
                 <!-- ========================================================================= -->
-                <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false" >
-                    <h:panelGrid id="dlgPanel" columns="1">
+                <p:dialog id="dialog" header="Edit" widgetVar="dlg" showEffect="fade" modal="true" resizable="false">
+                    <h:panelGrid id="dlgPanel" columns="1" >
                         <!--First Name-->
                         <h:outputLabel value="First Name: "/> 
                         <p:inputText placeholder="#{editView.selectedContact.firstName}" value="#{editView.selectedContact.firstName}"/>

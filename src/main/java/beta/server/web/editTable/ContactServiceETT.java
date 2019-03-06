@@ -51,7 +51,7 @@ public class ContactServiceETT implements Serializable {
      * @return
      */
     public TreeNode createCheckboxContacts() {
-        contactList = cEao.findAll(0, 10);
+        contactList = cEao.findAll();
 
         this.root = new CheckboxTreeNode(contact, null);
         
