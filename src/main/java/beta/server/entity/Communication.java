@@ -147,4 +147,9 @@ public class Communication implements Serializable {
         return toSingleLine;
     }
 
+    @Override
+    public String toString() {
+        return "Communication{" + "id=" + id + ", type=" + type + ", identifier=" + identifier + '}';
+    }
+
 }

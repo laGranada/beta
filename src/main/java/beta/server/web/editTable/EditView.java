@@ -7,6 +7,7 @@ package beta.server.web.editTable;
 
 import beta.server.entity.Contact;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -29,24 +30,26 @@ public class EditView implements Serializable {
     
     private Contact selectedContact;
     private TreeNode[] selectedNodes;
+
+    
     
     
     /**
      * get parent of node
      * go through children of parent
      * and then remove selected node from children
+     * set selectedNodes = null
      * @param nodes
      */
-    public void deleteNodes(){
+    public void deleteNodes(){        
         if(selectedNodes != null && selectedNodes.length > 0){
             for(int i = 0; i < selectedNodes.length; i++){
                 TreeNode parent = selectedNodes[i].getParent();
                 L.info("Check delete for deletenode={}, and parentnode={}", selectedNodes[i], parent);
-                parent.getChildren().remove(selectedNodes[i]);
-                
+                parent.getChildren().remove(selectedNodes[i]);    
             }
         }
-        
+        selectedNodes = null;
     }
     
     /**
