@@ -6,15 +6,15 @@
 package beta.server.web.editTable;
 
 import beta.server.entity.Contact;
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.TreeNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Selection for TreeTable
@@ -24,6 +24,8 @@ import org.primefaces.model.TreeNode;
 @ViewScoped
 @Named("editView")
 public class EditView implements Serializable {
+    
+    private final Logger L = LoggerFactory.getLogger(EditView.class);
     
     private Contact selectedContact;
     private TreeNode[] selectedNodes;
@@ -35,13 +37,16 @@ public class EditView implements Serializable {
      * and then remove selected node from children
      * @param nodes
      */
-    public void deleteNodes(TreeNode[] nodes){
-        if(nodes != null && nodes.length > 0){
-            for(int i = 0; i < nodes.length; i++){
-                TreeNode parent = nodes[i].getParent();
-                parent.getChildren().remove(nodes[i]);
+    public void deleteNodes(){
+        if(selectedNodes != null && selectedNodes.length > 0){
+            for(int i = 0; i < selectedNodes.length; i++){
+                TreeNode parent = selectedNodes[i].getParent();
+                L.info("Check delete for deletenode={}, and parentnode={}", selectedNodes[i], parent);
+                parent.getChildren().remove(selectedNodes[i]);
+                
             }
-        }        
+        }
+        
     }
     
     /**

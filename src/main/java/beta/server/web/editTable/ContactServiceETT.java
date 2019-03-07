@@ -13,15 +13,13 @@ import beta.server.entity.Contact;
 import beta.server.entity.Country;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.faces.view.ViewScoped;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.model.CheckboxTreeNode;
 
-import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 /**
@@ -29,7 +27,7 @@ import org.primefaces.model.TreeNode;
  * creates the treeTable
  * @author margarita.dueck
  */
-@Stateless
+@ViewScoped
 @Named("contactService")
 public class ContactServiceETT implements Serializable {
 

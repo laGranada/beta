@@ -234,4 +234,10 @@ public class Contact implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Contact{" + "id=" + id + ", sex=" + sex + ", title=" + title + ", firstName=" + firstName + ", lastName=" + lastName + ", addresses=" + addresses + ", communications=" + communications + '}';
+    }
+
+    
 }

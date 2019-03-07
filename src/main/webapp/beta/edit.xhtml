@@ -53,7 +53,7 @@ and open the template in the editor.
                 <!-- =======================      DELETE LINK       ========================== -->
                 <p:commandLink style="float: right"  >
                     <i class="material-icons" style="font-size:36px;color:purple">delete</i>
-                    <p:ajax event="click" listener="#{editView.deleteNodes(editView.selectedNodes)}"  update="ttId" /> 
+                    <p:ajax event="click" listener="#{editView.deleteNodes()}"  update="ttId" process="@this, ttId"/> 
                 </p:commandLink>
 
                 <!-- USED TO DISPLAY FACESMESSAGES -->

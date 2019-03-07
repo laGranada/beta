@@ -145,4 +145,8 @@ public class Address implements Serializable {
                 .append(" ").append(city).toString();
     }
 
+    @Override
+    public String toString() {
+        return "Address{" + "id=" + id + ", street=" + street + ", city=" + city + ", zipCode=" + zipCode + ", isoCountry=" + isoCountry + '}';
+    }
 }
