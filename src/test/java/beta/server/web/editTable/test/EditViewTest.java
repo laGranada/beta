@@ -5,6 +5,7 @@
  */
 package beta.server.web.editTable.test;
 
+import beta.server.web.editTable.EditView;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,6 +21,7 @@ public class EditViewTest {
     
     public EditViewTest() {
     }
+    private EditView editView;
     
     @BeforeClass
     public static void setUpClass() {
@@ -42,4 +44,10 @@ public class EditViewTest {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void testdeleteNodes(){
+        editView.deleteNodes();
+        assertNull(editView.getSelectedNodes());
+    }
 }
