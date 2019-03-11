@@ -5,6 +5,9 @@
  */
 package beta.server.web.editTable.test;
 
+import beta.server.eao.ContactEao;
+import beta.server.web.editTable.ContactServiceETT;
+import javax.inject.Inject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,29 +21,4 @@ import static org.assertj.core.api.Assertions.*;
  * @author margarita.dueck
  */
 public class ContactServiceETTTest {
-    
-    public ContactServiceETTTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-}
+}    
