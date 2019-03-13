@@ -49,7 +49,7 @@ public class ContactServiceETT implements Serializable {
      * @return
      */
     public TreeNode createCheckboxContacts() {
-        contactList = cEao.findAll();
+        contactList = cEao.findAll(0, 10);
 
         this.root = new CheckboxTreeNode(" ", null);
         

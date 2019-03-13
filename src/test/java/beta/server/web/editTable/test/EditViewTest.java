@@ -15,18 +15,32 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Ignore;
+import org.primefaces.model.CheckboxTreeNode;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 
 /**
  *
  * @author margarita.dueck
  */
 public class EditViewTest {
-    
+    EditView ev = new EditView();
+    ContactServiceETT cs = new ContactServiceETT();
+//    private TreeNode root;
+//    TreeNode[] selectedNodes;
+
+    @Before
+    public void init(){       
+//        selectedNodes[0] = new DefaultTreeNode("Communications", root);
+//        selectedNodes[1] = new DefaultTreeNode("description", root);
+//        selectedNodes[3] = new DefaultTreeNode("dhg", root);
+//        
+//        ev.setSelectedNodes(selectedNodes);
+        
+    }
 
     @Test
     public void testDeleteNodes(){
-        EditView ev = new EditView();
- 
         ev.deleteNodes();
         assertNull(ev.getSelectedNodes());
     }
